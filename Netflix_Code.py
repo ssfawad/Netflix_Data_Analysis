@@ -26,7 +26,7 @@ project_df.head()
 plt.figure(figsize=(14, 8))
 plt.title('Percentage of Movies vs. TV Shows', fontsize=15, fontstyle="oblique")
 plt.pie(project_df.type.value_counts(), explode=(0.04, 0.04), labels=project_df.type.value_counts().index,
-        colors=['orange', 'skyblue'], autopct='%1.1f%%', startangle=180)
+colors=['orange', 'skyblue'], autopct='%1.1f%%', startangle=180)
 plt.show()
 
 # Top 10 Countries Releasing Content
@@ -34,8 +34,7 @@ from collections import Counter
 
 country = project_df['country']
 country = country[country != 'Country Unavailable']
-country_total = pd.Series(
-    dict(Counter(','.join(country).replace(' ,', ',').replace(', ', ',').split(',')))).sort_values(ascending=False)
+country_total = pd.Series(dict(Counter(','.join(country).replace(' ,', ',').replace(', ', ',').split(',')))).sort_values(ascending=False)
 top_countries = country_total.head(10)
 plt.figure(figsize=(14, 8))
 sns.set(style="whitegrid")
@@ -47,9 +46,7 @@ plt.ylabel('Count')
 plt.show()
 
 # Top 10 Director by Titles
-direc_filter = project_df[project_df.director != 'No Director'].set_index('title').director.str.split(', ',
-                                                                                                      expand=True).stack().reset_index(
-    level=1, drop=True)
+direc_filter = project_df[project_df.director != 'No Director'].set_index('title').director.str.split(', ', expand=True).stack().reset_index(level=1, drop=True)
 plt.figure(figsize=(14, 8))
 plt.title('Top 10 Directors With Most Titles', fontsize=16, fontstyle="oblique")
 sns.countplot(y=direc_filter, palette="muted", order=direc_filter.value_counts().index[:10])
@@ -58,8 +55,7 @@ plt.ylabel('Director')
 plt.show()
 
 # Top 10 Genres
-genre_filter = project_df.set_index('title').listed_in.str.split(', ', expand=True).stack().reset_index(level=1,
-                                                                                                        drop=True);
+genre_filter = project_df.set_index('title').listed_in.str.split(', ', expand=True).stack().reset_index(level=1, drop=True);
 plt.figure(figsize=(14, 8))
 sns.countplot(y=genre_filter, palette="muted", order=genre_filter.value_counts().index[:10])
 plt.title('Top 10 Genres', fontsize=16, fontstyle="oblique")
@@ -68,9 +64,7 @@ plt.ylabel('Genre')
 plt.show()
 
 # Top 10 Actors by # of TV Shows
-show_filter = shows_df[shows_df.cast != 'No Cast'].set_index('title').cast.str.split(', ',
-                                                                                     expand=True).stack().reset_index(
-    level=1, drop=True)
+show_filter = shows_df[shows_df.cast != 'No Cast'].set_index('title').cast.str.split(', ', expand=True).stack().reset_index(level=1, drop=True)
 plt.figure(figsize=(14, 8))
 plt.title('Top 10 Actors Based on # of TV Shows', fontsize=16, fontstyle="oblique")
 sns.countplot(x=show_filter, palette="muted", order=show_filter.value_counts().index[:10])
@@ -80,9 +74,7 @@ plt.ylabel('Count')
 plt.show()
 
 # Top 10 Actors by # of Movies
-movies_filter = movies_df[movies_df.cast != 'No Cast'].set_index('title').cast.str.split(', ',
-                                                                                         expand=True).stack().reset_index(
-    level=1, drop=True)
+movies_filter = movies_df[movies_df.cast != 'No Cast'].set_index('title').cast.str.split(', ', expand=True).stack().reset_index(level=1, drop=True)
 plt.figure(figsize=(14, 8))
 plt.title('Top 10 Actors Based on # of Movies', fontsize=16, fontstyle="oblique")
 sns.countplot(x=movies_filter, palette="muted", order=movies_filter.value_counts().index[:10])
@@ -93,8 +85,7 @@ plt.show()
 
 # Movies by Year
 plt.figure(figsize=(14, 8))
-sns.countplot(y="release_year", data=movies_df, palette="muted",
-              order=movies_df['release_year'].value_counts().index[:10])
+sns.countplot(y="release_year", data=movies_df, palette="muted", order=movies_df['release_year'].value_counts().index[:10])
 plt.title('Top 10 Years with Most Movies Released', fontsize=16, fontstyle="oblique")
 plt.xlabel('Count')
 plt.ylabel('Year')
@@ -102,8 +93,7 @@ plt.show()
 
 # TV Shows by Year
 plt.figure(figsize=(14, 8))
-sns.countplot(y="release_year", data=shows_df, palette="muted",
-              order=shows_df['release_year'].value_counts().index[:10], )
+sns.countplot(y="release_year", data=shows_df, palette="muted", order=shows_df['release_year'].value_counts().index[:10], )
 plt.title('Top 10 Years with Most TV Shows Released', fontsize=16, fontstyle="oblique")
 plt.xlabel('Count')
 plt.ylabel('Year')
